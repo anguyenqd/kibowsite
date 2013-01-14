@@ -1,0 +1,106 @@
+@charset "utf-8";
+/* CSS Document */
+/* CSS for over 1200px - wide screen */
+
+body{
+	width:100%;
+	font-family: "helvetica neue", arial, sans-serif;
+	font-size: 10px;
+	color: #211922
+}
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+#wrapper{
+	max-width:1210px;
+	margin:0 auto;
+	padding:0;
+}
+.box{
+	width:192px;
+	float:left;
+	padding:15px 15px 0;
+	margin:10px;
+	background-color:#fff;
+	box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+	-moz-box-shadow: 0 1px 2px rgba(34,25,25,0.4);
+	-webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+}
+.box img{
+	width:192px;
+}
+.box a{
+	cursor: -webkit-zoom-in; cursor: -moz-zoom-in;
+}
+.box .comment{
+	font-size:8pt;
+	padding:5px 0 10px 0;
+}
+/*################################################################################################*/
+/*Optional for non animation*/
+/*
+@media only screen and (min-width:1211px) {
+	
+body{
+	width:100%;
+	font-family: "helvetica neue", arial, sans-serif;
+	font-size: 10px;
+	color: #211922
+}
+
+#wrapper{
+	width:1210px;
+	height:auto;
+	margin:0 auto;
+	padding:0;
+}
+.box{
+	width:192px;
+	height:auto;
+	float:left;
+	padding:15px 15px 0;
+	margin:10px;
+	background-color:#fff;
+	box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+	-moz-box-shadow: 0 1px 2px rgba(34,25,25,0.4);
+	-webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+}
+.box img{
+	width:192px;
+}
+.box .comment{
+	font-size:8pt;
+	width:192px;
+	padding:5px 0 10px 0;
+}
+}
+CSS for under 1199px - narrow screen 
+@media only screen and (max-width:1210px) {
+body{
+	width:100%;	
+}
+#wrapper{
+	max-width:968px;
+	margin:0 auto;
+	padding:0;
+}
+.box{
+	width:192px;
+	height:auto;
+	float:left;
+	padding:15px 15px 0;
+	margin:10px;
+	background-color:#fff;
+	box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+	-moz-box-shadow: 0 1px 2px rgba(34,25,25,0.4);
+	-webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+}
+.box img{
+	width:192px;
+}
+.box .comment{
+	font-size:8pt;
+	width:192px;
+	padding:5px 0 10px 0;
+}
+}
+*/

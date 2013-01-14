@@ -1,0 +1,19 @@
+<h2>Send invitation Email</h2>
+<div class="msg_errors">
+	<ul>
+	<?php $msgErrors = $this->msgErrors; ?>
+
+	<?php
+	if (count ( $msgErrors ) > 0) {
+		?>
+			<?php foreach ($this->msgErrors as $error) { ?>
+						<li><?php echo $error; ?></li>	
+			<?php
+		
+		}
+	}
+	?>
+	</ul>
+</div>
+
+<?php echo $this->form; ?>

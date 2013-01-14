@@ -1,0 +1,52 @@
+<h1>Post index page</h1>
+<form id="article_form_list" method="post" action="<?php echo BASE_PATH; ?>/post/edit">
+<table width='300' align='center' border='1'>
+<tr>
+    <td>Post picture</td>
+    <td>Post caption</td>
+    <td>Edit</td>
+    <td>Delete</td>
+</tr>
+<?php
+echo '<pre>';
+print_r($this->data);
+echo '</pre>';
+foreach($this->data as $item)
+{
+    echo "<tr>";
+    echo "<td align='center'><img src='".$item['post_picture']."' width=100 /></td>";
+    echo "<td align='center'>".$item['post_caption']."</td>";
+    echo "<td align='center'><a href='javascript:void(0)' name='". $item['post_id'] ."' onClick='updateForm(this.name)'>Edit</a></td>";
+    echo "<td align='center'><a href='javascript:void(0)' name='". $item['post_id'] ."' onClick='deleteForm(". $item['post_id'] .",\"".$item['post_picture']."\")'>Delete</a></td>";
+    echo "</tr>";
+}
+?>
+</table>
+<?php 
+       echo $this->paginationControl($this->data, 'Sliding' , 'post/pagination.phtml'); 
+?>
+<input name="txtActionName" id="txtActionName" value="" type="text" style="display:none;" />
+<input name="txtPostImage" id="txtPostImage" value="" type="text" style="display:none;" />
+<input name="txtArticelID" id="txtArticelID" value="" type="text" style="display:none;" />
+<input id="btnSubmit" type="submit" value="submit" style="display:none;"/>
+</form>
+<script>
+function updateForm(articelID){
+	var txtArticelID = document.getElementById('txtArticelID');
+	txtArticelID.value = articelID;
+	var txtActionName = document.getElementById('txtActionName');
+	txtActionName.value = 'edit-step-1';
+	var btnSubmit = document.getElementById('btnSubmit');
+	btnSubmit.click();
+}
+function deleteForm(articelID,postImage){
+	var form = document.getElementById('article_form_list');
+	form.action = '<?php echo BASE_PATH; ?>' + '/post/delete';
+	var txtArticelID = document.getElementById('txtArticelID');
+	txtArticelID.value = articelID;
+	var txtPostImage = document.getElementById('txtPostImage');
+	txtPostImage.value = postImage;
+	var btnSubmit = document.getElementById('btnSubmit');
+	btnSubmit.click();
+}
+</script>

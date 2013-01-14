@@ -1,0 +1,13 @@
+.clearfix {
+	zoom: 1;
+	display: block;
+} 
+.box {
+    border:1px solid #ccc;
+}
+.box a{
+   cursor:pointer;
+}
+#wrapper{
+	max-width:1220px;
+}

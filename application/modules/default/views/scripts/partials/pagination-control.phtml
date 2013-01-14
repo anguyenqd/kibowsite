@@ -1,0 +1,37 @@
+<?php
+if ($this->pageCount) {
+	/*Add each of the request to URL*/
+	$params = Zend_Controller_Front::getInstance ()->getRequest ()->getParams ();
+	unset ( $params ['controller'] );
+	unset ( $params ['module'] );
+	unset ( $params ['action'] );	
+}
+?>
+<div class="paginationControl">
+	<!-- Previous page link -->
+	<?php
+	if (isset($this->previous)) {
+		?>
+		<a href="<?php echo $this->url(array_merge($params,array('page' => $this->previous))); ?>" title="<?php echo $this->previous; ?>">&lt; Previous </a>
+		<?php
+	} 
+	?>
+	
+	<!-- Page number links -->
+	<?php
+	foreach ($this->pagesInRange as $page) {
+		?>
+		<a href="<?php echo $this->url(array_merge(array('page' => $page))); ?>" title="<?php echo $page; ?>"><?php echo $page; ?> </a>
+		<?php
+	} 
+	?>
+	
+	<!-- Next page link -->
+	<?php
+	if (isset($this->next)) {
+		?>
+		<a href="<?php echo $this->url(array_merge(array('page' => $this->next))); ?>" title="<?php echo $this->next; ?>"> Next &gt; </a>
+		<?php
+	} 
+	?>
+</div>

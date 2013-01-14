@@ -1,0 +1,40 @@
+<!-- 
+<tr>
+	<td><a href='<?php echo $this->baseUrl() . '/bug/edit/id/' . $this->id;?>'>Edit</a>
+		| 
+    <a href='<?php echo $this->baseUrl() . '/bug/delete/id/' . $this->id;?>'>Delete</a></td>
+	<td><?php echo date('m/d/y', $this->date); ?></td>
+	<td><?php echo $this->priority; ?></td>
+	<td><?php echo $this->status; ?></td>
+	<td><?php echo $this->url; ?></td>
+	<td><?php echo $this->author; ?></td>
+	<td><?php echo $this->description; ?></td>
+</tr>
+ -->
+ 
+<?php
+$i = 1; 
+echo '<pre>';
+//print_r($this);
+echo '</pre>';
+?>
+<tr class="row0">
+	<td style="cursor: pointer;" onclick="checkThis(&#39;cb0&#39;);"><?php echo $i++; ?></td>
+	<td>
+	    <input type="checkbox" id="cb0" name="cid[]" value="27" onclick="isChecked(this.checked);"></td>
+	<td onclick="checkThis(&#39;cb0&#39;);">
+	    <a href="http://localhost/essay.kunaviet/TEMPLATE_Admin/users/update/27"> abc110</a></td>
+	<td>abc110</td>
+	<td align="center"><img width="16" height="16" border="0"
+		src="./layout_files/publish_x.png" alt=""></td>
+	<td align="center"><a href="javascript:void(0);"
+		onclick="checkOrUncheck(&#39;27&#39;, &#39;published&#39;, &#39;users&#39;, &#39;ah27&#39;)">
+			<span id="ah27"> <img width="16" height="16" border="0"
+				src="./layout_files/publish_x.png" alt="Đã khóa">
+		</span>
+	</a></td>
+	<td>Register</td>
+	<td><a href="mailto:abc110@abc110.abc110"> abc110@abc110.abc110</a></td>
+	<td nowrap="nowrap">30-11--0001 00:00:00</td>
+	<td>27</td>
+</tr>

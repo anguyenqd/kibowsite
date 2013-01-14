@@ -1,0 +1,22 @@
+
+<form action="<?php echo $this->element->getAction(); ?>"
+	method="<?php echo $this->element->getMethod(); ?>">
+
+	Email:
+	<?php echo $this->element->txtEmail; ?><br />
+	
+	Old Password:
+	<?php echo $this->element->txtPasswordOld; ?><br />
+	
+	Password:
+	<?php echo $this->element->txtPassword; ?><br />
+	
+	Password confirm:
+	<?php echo $this->element->txtPasswordConfirm; ?><br />
+	
+	Display Name:
+	<?php echo $this->element->txtDisplayName; ?><br />
+
+	<button class="green" type="submit">Sign up</button>
+
+</form>

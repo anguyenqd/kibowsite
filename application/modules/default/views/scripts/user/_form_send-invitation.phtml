@@ -1,0 +1,14 @@
+
+<form action="<?php echo $this->element->getAction(); ?>"
+	method="<?php echo $this->element->getMethod(); ?>">
+
+	<label for="txtName">Name of Crew: </label>
+	<?php echo $this->element->txtName; ?><br />
+	
+	<label for="txtEmail">Email: </label>
+	<?php echo $this->element->txtEmail; ?><br />
+
+
+	<button class="green" type="submit">Send invitation</button>
+
+</form>

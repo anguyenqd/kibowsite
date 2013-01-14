@@ -1,0 +1,44 @@
+<?php
+
+defined ( 'TEMPLATE_PATH' ) || define ( 'TEMPLATE_PATH', $this->baseUrl () . '/templates/canhosaigon/' );
+echo $this->doctype ();
+
+?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<base href="<?php echo $this->baseUrl(); ?>/" />
+<?php
+
+echo $this->headTitle ();
+echo $this->headMeta ();
+echo $this->headLink ();
+echo $this->headStyle ();
+echo $this->headScript ();
+
+?>
+</head>
+
+<body>
+	<h1>Kibow site - Default layout.</h1>
+	<?php
+    $auth = Zend_Auth::getInstance();
+    $infoUser = $auth->getIdentity();
+    
+    if ($infoUser) {
+    	?>
+    	<a href="<?php echo BASE_PATH . '/user/edit'?>" title=""><?php echo $infoUser->display_name; ?></a>
+    	<?php
+    }
+    else {
+    	?>
+    	<a href="<?php echo BASE_PATH . '/user/sign-in'; ?>">Sign In</a>
+    	<?php 
+    }
+    ?> 
+    
+    ..:..
+    <a href="<?php echo BASE_PATH . '/user/sign-out'; ?>">Sign out</a>
+	<hr />
+	<?php echo $this->layout()->content; ?>
+</body>
+</html>
