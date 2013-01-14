@@ -47,7 +47,7 @@ class Form_Editpost extends Zend_Form{
 		
 		$this->setDecorators(array(
 				array('viewScript',
-						array('viewScript' => 'Form_edit_post.phtml')
+						array('viewScript' => 'post/Form_edit_post.phtml')
 				)
 		));
 	}

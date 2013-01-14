@@ -8,13 +8,10 @@
     <td>Delete</td>
 </tr>
 <?php
-echo '<pre>';
-print_r($this->data);
-echo '</pre>';
 foreach($this->data as $item)
 {
     echo "<tr>";
-    echo "<td align='center'><img src='".$item['post_picture']."' width=100 /></td>";
+    echo "<td align='center'><img src='" . BASE_PATH . '/' . UPLOAD_FOLDER . '/' .$item['post_picture']."' width=100 /></td>";
     echo "<td align='center'>".$item['post_caption']."</td>";
     echo "<td align='center'><a href='javascript:void(0)' name='". $item['post_id'] ."' onClick='updateForm(this.name)'>Edit</a></td>";
     echo "<td align='center'><a href='javascript:void(0)' name='". $item['post_id'] ."' onClick='deleteForm(". $item['post_id'] .",\"".$item['post_picture']."\")'>Delete</a></td>";
@@ -22,8 +19,8 @@ foreach($this->data as $item)
 }
 ?>
 </table>
-<?php 
-       echo $this->paginationControl($this->data, 'Sliding' , 'post/pagination.phtml'); 
+<?php
+    echo $this->paginationControl($this->data, 'Sliding' , 'post/pagination.phtml'); 
 ?>
 <input name="txtActionName" id="txtActionName" value="" type="text" style="display:none;" />
 <input name="txtPostImage" id="txtPostImage" value="" type="text" style="display:none;" />
