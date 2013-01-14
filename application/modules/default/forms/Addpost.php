@@ -9,7 +9,7 @@ class Form_Addpost extends Zend_Form{
 		//add size validate
 		$postPicture->addValidator('FilesSize',
                       false,
-                      array('min' => '1kB', 'max' => '4MB'));
+                      array('min' => '1kB', 'max' => '2MB'));
 		//add Extension is image
 		$postPicture->addValidator('Extension',false,array('jpg','png','gif','messages' => 'Not valid file type!'));
 		

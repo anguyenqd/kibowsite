@@ -66,6 +66,13 @@ class PostController extends Zend_Controller_Action {
 							$upload->_upload->addFilter("Rename",$newFileName);
 							$upload->_upload->receive();
 							$postPicture = $newFileName;
+							//create thumbnail
+							$thumb = Dante_Thumbnail_PhpThumbFactory::create(UPLOAD_PATH . '/' . $newFileName);
+							$thumb->resize(THUMBNAIL_WITDH,THUMBNAIL_HEIGHT);
+							$thumb->save(THUMBNAIL_FOLDER . '/' . THUMBNAIL_NAME . $newFileName);
+							//create thumbnail
+							//$thumb = new PhpThumbFactory();
+							//$thumb->re
 						}
 					}
 					
@@ -188,12 +195,19 @@ class PostController extends Zend_Controller_Action {
 								$newFileName = 'file-'.$timestampNow.'-'. rand(11111111,99999999).'.'.$oginalFileName['extension'];
 								$upload->_upload->addFilter("Rename",$newFileName);
 								$upload->_upload->receive();
+								
 								if($oldImage != 'N/A')
 								{
 									//delete old image
-									unlink($oldImage);
+									unlink(UPLOAD_PATH . '/' . $oldImage);
+									//delete old thumbnail
+									unlink(THUMBNAIL_FOLDER . '/' . THUMBNAIL_NAME . $oldImage);
 								}
 								$postPicture = $newFileName;
+								//create thumbnail
+								$thumb = Dante_Thumbnail_PhpThumbFactory::create(UPLOAD_PATH . '/' . $newFileName);
+								$thumb->resize(200,200);
+								$thumb->save(THUMBNAIL_FOLDER . '/' . THUMBNAIL_NAME . $newFileName);
 							}else
 							{
 								$postPicture = $oldImage;

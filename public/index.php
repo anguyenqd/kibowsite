@@ -14,7 +14,7 @@ defined ( 'UPLOAD_FOLDER' ) || define ( 'UPLOAD_FOLDER', 'upload' );
 
 defined ( 'UPLOAD_PATH' ) || define ( 'UPLOAD_PATH', (dirname ( __FILE__ ) . DS . UPLOAD_FOLDER) );
 
-defined ( 'BASE_PATH' ) || define ( 'BASE_PATH', 'http://localhost/kb_zendtemp/public' );
+defined ( 'BASE_PATH' ) || define ( 'BASE_PATH', 'http://localhost:8080/kibowsite/public' );
 
 defined ( 'SYS_EMAIL' ) || define ( 'SYS_EMAIL', 'vuongngocnam@gmail.com' );
 
@@ -22,6 +22,15 @@ defined ( 'PAGING_ITEM_LIMIT' ) || define ( 'PAGING_ITEM_LIMIT', 10);
 
 defined ( 'PAGING_RANGE_LIMIT' ) || define ( 'PAGING_RANGE_LIMIT', 3);
 
+defined ( 'THUMBNAIL_FOLDER' ) || define ( 'THUMBNAIL_FOLDER', UPLOAD_PATH . DS . 'thumbnail');
+
+defined ( 'THUMBNAIL_PATH' ) || define ( 'THUMBNAIL_PATH', BASE_PATH . '/' . UPLOAD_FOLDER . '/' . 'thumbnail');
+
+defined ( 'THUMBNAIL_NAME' ) || define ( 'THUMBNAIL_NAME', 'thumb-');
+
+defined ( 'THUMBNAIL_WITDH' ) || define ( 'THUMBNAIL_WITDH', 200);
+
+defined ( 'THUMBNAIL_HEIGHT' ) || define ( 'THUMBNAIL_HEIGHT', 200);
 /**
  * Phân cách giữa các giá trị nếu giá trị là mảng
  */

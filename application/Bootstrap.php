@@ -52,7 +52,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 						'cp_model' => array (
 								'path' => 'modules/cp/models/',
 								'namespace' => 'Cp_Model_' 
-						) 
+						),
+						'dante_thumbnail' => array (
+								'path' => '../library/Dante/Thumbnail/',
+								'namespace' => 'Dante_Thumbnail_'
+						)
 				) 
 		) );
 		
