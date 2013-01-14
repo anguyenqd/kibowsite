@@ -30,12 +30,9 @@ class PostController extends Zend_Controller_Action {
 	}
 	
 	public function imagePopUpAction() {
-		
 		$this->_helper->layout()->disableLayout();
-		
 		$modelPost = new Model_post();
-		$post = $modelPost-> getPostById($this->_request->getParam('id'));
-				
+		$post = $modelPost-> getPostById($this->_request->getParam('id'));		
 		$this->view->postInfo = $post[0];
 	}
 	
@@ -55,16 +52,15 @@ class PostController extends Zend_Controller_Action {
 				try {
 					$postPicture = 'N/A';
 					//check file upload
+					$timestampNow = time();
 					foreach($files as $file=>$info){
 						if($upload->_upload->isUploaded($file)){
 							//change file name before upload - file name will be timestamp + orginalName
 							$oginalFileName = pathinfo($upload->_upload->getFileName());
-							$timestampNow = time();
-							$newFileName = 'file-'.$timestampNow.'.'.$oginalFileName['extension'];
+							$newFileName = 'file-'.$timestampNow.'-'. rand(11111111,99999999).'.'.$oginalFileName['extension'];
 							$upload->_upload->addFilter("Rename",$newFileName);
 							$upload->_upload->receive();
-							//unlink($oginalFileName['dirname'].'/'.$newFileName); //delete file
-							$postPicture = UPLOAD_FOLDER .'/'. $newFileName;
+							$postPicture = $newFileName;
 						}
 					}
 					
@@ -159,7 +155,7 @@ class PostController extends Zend_Controller_Action {
 				}
 				//set data to form
 				if($postPicture != 'N/A')
-					$this->view->form->imgOldImage->setImage(BASE_PATH . '/' . $postPicture);
+					$this->view->form->imgOldImage->setImage(BASE_PATH . '/' . UPLOAD_FOLDER . '/' . $postPicture);
 				else
 					$this->view->form->imgOldImage->setImage(BASE_PATH . '/' . UPLOAD_FOLDER . '/images.jpg');
 				$this->view->form->txtPostCaption->setValue($postCaption);
@@ -193,7 +189,7 @@ class PostController extends Zend_Controller_Action {
 									//delete old image
 									unlink($oldImage);
 								}
-								$postPicture = UPLOAD_FOLDER .'/'. $newFileName;
+								$postPicture = $newFileName;
 							}else
 							{
 								$postPicture = $oldImage;
