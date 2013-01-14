@@ -4,16 +4,6 @@ class Form_Addpost extends Zend_Form{
 		$this->setAction('')->setMethod('post');
 		$this->setAttrib('enctype','multipart/form-data');
 		
-		/*
-		$post_picture = $this->createElement("text","txtPost_picture",array(
-																		"size"=>"30"	
-		));
-		
-		$post_picture->setRequired(true)->addValidators(array(
-																array('NotEmpty',true,array('messages' => 'Picture can not be empty')),
-																array('Alnum',true,array('messages' => 'Only character or digital number')),
-																array('StringLength',true,array(5,12))
-		));*/
 		//Post picture element
 		$postPicture = $this->createElement('file', 'flPostPicture');
 		//add size validate
@@ -50,7 +40,7 @@ class Form_Addpost extends Zend_Form{
 		
 		$this->setDecorators(array(
 				array('viewScript',
-						array('viewScript' => 'Form_add_post.phtml')
+						array('viewScript' => 'post/Form_add_post.phtml')
 				)
 		));
 	}
