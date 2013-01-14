@@ -7,7 +7,7 @@ foreach($this->data as $item)
     $linkPopUp = BASE_PATH . '/post/image-pop-up/id/' . $item['post_id'];
 	echo '<div class="box">';
 	echo '<a class="popup fancybox" title="'. $item['post_caption'] .'" href="'. $linkPopUp . '">';
-	echo '<img src="'. BASE_PATH . '/' . $item['post_picture'] .'"/></a>';
+	echo '<img src="'. BASE_PATH .  '/' . UPLOAD_FOLDER . '/' . $item['post_picture'] .'"/></a>';
 	echo '<div class="comment">'. $item['post_caption'] .'</div>';
 	echo "</div>";
 }
