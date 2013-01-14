@@ -29,6 +29,11 @@ class PostController extends Zend_Controller_Action {
 		
 	}
 	
+	public function listPostAction()
+	{
+		$this->_loadPostList();
+	}
+	
 	public function imagePopUpAction() {
 		$this->_helper->layout()->disableLayout();
 		$modelPost = new Model_post();
@@ -118,7 +123,6 @@ class PostController extends Zend_Controller_Action {
 		$currentPage = $this->_request->getParam('page',1);
 		$paginator->setCurrentPageNumber($currentPage);
 		$this->view->data=$paginator;
-		
 	}
 	
 	public function editAction () {
