@@ -1,0 +1,12 @@
+<h1>Post edit page</h1>
+<ul class="errors_list">
+<?php 
+	$errorsMessages = $this->form->getMessages();
+	foreach($errorsMessages as $messages)
+		foreach ($messages as $message)
+			echo "<li>".$message."</li>"; 
+?>
+</ul>
+<?php 
+echo $this->form;
+?>

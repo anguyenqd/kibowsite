@@ -1,0 +1,15 @@
+<form enctype="<?php echo $this->element->getAttrib('enctype'); ?>" action='<?php echo $this->element->getAction(); ?>'
+method= '<?php echo $this->element->getMethod(); ?>'>
+<p>Your Image:<br />
+<?php echo $this->element->flPostPicture; ?>
+</p>
+<p>Your caption:<br />
+<?php echo $this->element->txtPostCaption; ?>
+</p>
+<p>Display post :<br />
+<?php echo $this->element->rdStatus; ?>
+</p>
+<p>
+<?php echo $this->element->btnSubmit; ?>
+</p>
+</form>

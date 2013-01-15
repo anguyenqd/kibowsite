@@ -22,41 +22,28 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 				'basePath' => APPLICATION_PATH,
 				'namespace' => '',
 				'resourceTypes' => array (
-						'form' => array (
-								'path' => 'forms/',
-								'namespace' => 'Form_' 
+						//default bootstrap
+						'default_model' => array (
+								'path' => 'modules/default/models/',
+								'namespace' => 'Model_'
 						),
-						'page' => array (
-								'path' => '../library/CMS/Content/Item/',
-								'namespace' => 'CMS_Content_Item_' 
-						),
-						'acl' => array (
-								'path' => '../library/CMS/Controller/Plugin/',
-								'namespace' => 'CMS_Controller_Plugin_' 
-						),
-						'Model_nested' => array (
-								'path' => '../library/VNN/Model/',
-								'namespace' => 'VNN_Model_' 
-						),
-						
-						'nested' => array (
-								'path' => '../library/VNN/',
-								'namespace' => 'VNN_' 
-						),
-						
-						'cp_block' => array (
-								'path' => 'modules/cp/blocks/',
-								'namespace' => 'Cp_Block_' 
-						),
-						
-						'cp_model' => array (
-								'path' => 'modules/cp/models/',
-								'namespace' => 'Cp_Model_' 
+						'default_form' => array (
+								'path' => 'modules/default/forms/',
+								'namespace' => 'Form_'
 						),
 						'dante_thumbnail' => array (
 								'path' => '../library/Dante/Thumbnail/',
 								'namespace' => 'Dante_Thumbnail_'
-						)
+						),
+						//cp bootstrap
+						'cp_model' => array (
+								'path' => 'modules/cp/models/',
+								'namespace' => 'Cp_Model_'
+						),
+						'cp_form' => array (
+								'path' => 'modules/cp/forms/',
+								'namespace' => 'Cp_Form_'
+						),
 				) 
 		) );
 		
