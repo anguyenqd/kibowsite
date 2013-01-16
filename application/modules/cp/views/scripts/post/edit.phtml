@@ -1,12 +1,20 @@
-<h1>Post edit page</h1>
-<ul class="errors_list">
+<section id="main" class="column">
 <?php 
+	
+	if($this->mess == 'edit-success')
+	{
+		echo '<h4 class="alert_success">Edit post success</h4>';
+	}else if($this->mess == 'edit-fail')
+	{
+		echo '<h4 class="alert_error">Edit post fail</h4>';
+	}
+	
 	$errorsMessages = $this->form->getMessages();
 	foreach($errorsMessages as $messages)
 		foreach ($messages as $message)
-			echo "<li>".$message."</li>"; 
-?>
-</ul>
-<?php 
+			echo "<h4 class='alert_error'>".$message."</h4>"; 
+
+	
 echo $this->form;
 ?>
+</section>

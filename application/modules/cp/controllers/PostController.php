@@ -16,10 +16,6 @@ class Cp_PostController extends Zend_Controller_Action {
 		$this->_loadPostList();
 	}
 	
-	public function listPostAction()
-	{
-		$this->_loadPostList();
-	}
 	
 	public function imagePopUpAction() {
 		$this->_helper->layout()->disableLayout();
@@ -29,7 +25,7 @@ class Cp_PostController extends Zend_Controller_Action {
 	}
 	
 	public function addAction() {
-		$addPostForm = new Form_Addpost();
+		$addPostForm = new Cp_Form_Addpost();
 		if($this->_request->getPost())
 		{
 			$data = $this->_request->getPost();
@@ -57,9 +53,6 @@ class Cp_PostController extends Zend_Controller_Action {
 							$thumb = Dante_Thumbnail_PhpThumbFactory::create(UPLOAD_PATH . '/' . $newFileName);
 							$thumb->resize(THUMBNAIL_WITDH,THUMBNAIL_HEIGHT);
 							$thumb->save(THUMBNAIL_FOLDER . '/' . THUMBNAIL_NAME . $newFileName);
-							//create thumbnail
-							//$thumb = new PhpThumbFactory();
-							//$thumb->re
 						}
 					}
 					
@@ -80,10 +73,11 @@ class Cp_PostController extends Zend_Controller_Action {
 					$result = $mpost->addNewPost($arr_data);
 					if($result != 0)
 					{
-						$this->view->mess = 'success';
+						$_SESSION['post']['success'] = 'add-success';
 						$this->getResponse()->setRedirect(ADMINCP_PATH . "/post/");
 					}else
 					{
+						$_SESSION['post']['fail'] = 'add-fail';
 						$addPostForm->addErrorMessage("Can not add new post!");
 					}
 					
@@ -111,8 +105,19 @@ class Cp_PostController extends Zend_Controller_Action {
 	 */
 	private function _loadPostList()
 	{	
-		$mpost = new Model_post();
-		$paginator = Zend_Paginator::factory($mpost->getPosts(null, array('field' => 'post_time', 'dir' => 'DESC')));
+		$mpost = new Model_morepost();
+		//$paginator = Zend_Paginator::factory($mpost->getPosts(null, array('field' => 'post_time', 'dir' => 'DESC')));
+		$arr_cols = array("kb_post.post_picture",
+							"kb_post.post_caption",
+							"kb_post.post_id",
+							"kb_post.post_time",
+							"kb_office.office_name");
+		$arr_table = array('kb_post','kb_office','kb_user');
+		$arr_where = array('kb_user.user_id = ' => 'kb_post.user_id',
+							'kb_office.office_id = ' => 'kb_user.office_id');
+		$arr_order_by = array('kb_post.post_time' => 'DESC');
+		$limit = 0;
+		$paginator = Zend_Paginator::factory($mpost->getPostList($arr_cols, $arr_table, $arr_where,$arr_order_by,$limit));
 		$paginator->setItemCountPerPage(PAGING_ITEM_LIMIT);
 		$paginator->setPageRange(PAGING_RANGE_LIMIT);
 		$currentPage = $this->_request->getParam('page',1);
@@ -122,47 +127,43 @@ class Cp_PostController extends Zend_Controller_Action {
 	
 	public function editAction () {
 		$mpost = new Model_post();
-		//create form
-		$meditpost = new Form_Editpost();
-		$user_id = 1;
-		if($this->_request->getPost())
-		{
+		$postID = $this->_request->getParam('id');
+		if($postID != null){
+			//create form
+			$meditpost = new Cp_Form_Editpost();
+			$user_id = 1;
 			$data = $this->_request->getPost();
 			$actionName = $this->_request->getPost('txtActionName');
 			$this->view->form = $meditpost;
-			if($actionName == 'edit-step-1')
+			//load post information
+			$arr_colums = array('post_id',
+					'post_picture',
+					'post_caption',
+					'post_time',
+					'user_id',
+					'post_status',
+					'language_id');
+			$oldPostData = $mpost->getPost($user_id, $postID, $arr_colums);
+			$postPicture = "";
+			$postCaption = "";
+			$postStatus = "";
+			foreach ($oldPostData as $postData)
 			{
-				$postID = $this->_request->getPost('txtArticelID');
-				
-				//load post information
-				$arr_colums = array('post_id',
-									'post_picture',
-									'post_caption',
-									'post_time',
-									'user_id',
-									'post_status',
-									'language_id');
-				$oldPostData = $mpost->getPost($user_id, $postID, $arr_colums);
-				$postPicture = "";
-				$postCaption = "";
-				$postStatus = "";
-				foreach ($oldPostData as $postData)
-				{
-					$postPicture = $postData['post_picture'];
-					$postCaption = $postData['post_caption'];
-					$postStatus = $postData['post_status'];
-				}
-				//set data to form
-				if($postPicture != 'N/A')
-					$this->view->form->imgOldImage->setImage(BASE_PATH . '/' . UPLOAD_FOLDER . '/' . $postPicture);
-				else
-					$this->view->form->imgOldImage->setImage(BASE_PATH . '/' . UPLOAD_FOLDER . '/images.jpg');
-				$this->view->form->txtPostCaption->setValue($postCaption);
-				$this->view->form->rdStatus->setValue($postStatus);
-				$this->view->form->hdPostID->setValue($postID);
-				$this->view->form->hdOldImage->setValue($postPicture);
-				
-			}else if($actionName == 'edit-step-2')
+				$postPicture = $postData['post_picture'];
+				$postCaption = $postData['post_caption'];
+				$postStatus = $postData['post_status'];
+			}
+			//set data to form
+			if($postPicture != 'N/A')
+				$this->view->form->imgOldImage->setImage(BASE_PATH . '/' . UPLOAD_FOLDER . '/' . $postPicture);
+			else
+				$this->view->form->imgOldImage->setImage(BASE_PATH . '/' . UPLOAD_FOLDER . '/images.jpg');
+			$this->view->form->txtPostCaption->setValue($postCaption);
+			$this->view->form->rdStatus->setValue($postStatus);
+			$this->view->form->hdPostID->setValue($postID);
+			$this->view->form->hdOldImage->setValue($postPicture);
+			
+			if($this->_request->getPost())
 			{
 				if(!$meditpost->isValid($data))//Invalid
 				{
@@ -183,7 +184,7 @@ class Cp_PostController extends Zend_Controller_Action {
 								$newFileName = 'file-'.$timestampNow.'-'. rand(11111111,99999999).'.'.$oginalFileName['extension'];
 								$upload->_upload->addFilter("Rename",$newFileName);
 								$upload->_upload->receive();
-								
+			
 								if($oldImage != 'N/A')
 								{
 									//delete old image
@@ -201,56 +202,66 @@ class Cp_PostController extends Zend_Controller_Action {
 								$postPicture = $oldImage;
 							}
 						}
-
-						$mmorepost = new Model_morepost();
+			
+						$mmorepost = new Model_post();
 						$postID = $this->_request->getPost('hdPostID');
 						$postCaption = $this->_request->getPost('txtPostCaption');
 						$postStatus = $this->_request->getPost('rdStatus');
 						$arr_data = array('post_picture' => $postPicture,
-										'post_caption' => $postCaption,
-										'post_status' => $postStatus);
+								'post_caption' => $postCaption,
+								'post_status' => $postStatus);
+			
+						//$result = $mmorepost->editPost($arr_data, $user_id, $postID);
+						$result = $mmorepost->updatePost($postID, $arr_data);
+						if($result > -1)
+						{
+							$this->view->mess = "edit-success";
+						}else
+						{
+							$this->view->mess = "edit-fail";
+						}
 						
-						$result = $mmorepost->editPost($arr_data, $user_id, $postID);
-						//$this->view->mess = "success";
-						$this->getResponse()->setRedirect(ADMINCP_PATH . "/post/");
 					}catch(Zend_Exception $e)
 					{
 						echo "Caught exception: " . get_class($e) . "\n";
 						echo "Message: " . $e->getMessage() . "\n";
 					}
 				}
-			}else
-			{
-				$this->getResponse()->setRedirect(ADMINCP_PATH . "/post/");
 			}
-		}else
+		}else 
 		{
 			$this->getResponse()->setRedirect(ADMINCP_PATH . "/post/");
-		}
-		
+		}	
 	}
 	
 	public function deleteAction () {
 		//Delete
-		if($this->_request->getPost())
+		$postId = $this->_request->getParam('id');
+		if($postId != null)
 		{
-			$postId = $this->_request->getPost('txtArticelID');
-			$postImage = $this->_request->getPost('txtPostImage');
 			$mpost = new Model_post();
+			$postData = $mpost->getPostById($postId);
+			$postImage =  $postData[0]['post_picture'];
 			$arr_id = array($postId);
-			$user_id = 1;
-			$arr_add_condition = array($user_id => array("colum" => "user_id","operater" => "="));
-			$result = $mpost->deletePost($arr_id, $arr_add_condition);
+			$arr_add_condition = array($postId => array("colum" => "post_id","operater" => "="));
+			$result = $mpost->deletePost($arr_add_condition);
 			if($result > 0)
 			{
 				//Success
-				unlink($postImage);
-				$this->getResponse()->setRedirect(ADMINCP_PATH . "/post/");
+				//delete old image
+				unlink(UPLOAD_PATH . '/' . $postImage);
+				//delete old thumbnail
+				unlink(THUMBNAIL_FOLDER . '/' . THUMBNAIL_NAME . $postImage);
+				$_SESSION['post']['success'] = "delete-success";
 			}else
 			{
 				//Error
+				$_SESSION['post']['fail'] = "delete-fail";
 			}
-			
+			$this->getResponse()->setRedirect(ADMINCP_PATH . "/post/");
+		}else
+		{
+			$this->getResponse()->setRedirect(ADMINCP_PATH . "/post/");
 		}
 	}
 }

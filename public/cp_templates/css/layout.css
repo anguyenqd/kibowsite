@@ -363,10 +363,12 @@ margin-top: 20%;
 
 section#main {
 width: 77%;
-min-height: 500px;
+max-height: 585px;
+height:585px;
 background: url(../images/sidebar_shadow.png) repeat-y left top;
 float: left;
 margin-top: -2px;
+overflow-y:scroll;
 }
 
 #main h3 {
@@ -438,7 +440,7 @@ float: left;
 }
 
 .width_3_quarter {
-width: 66%;
+width: 94%;
 margin-right: 0;
 float: left;
 }

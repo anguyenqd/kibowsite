@@ -1,6 +1,6 @@
 <?php
 
-// session_start();
+session_start();
 
 date_default_timezone_set ( 'Asia/Ho_Chi_Minh' );
 
@@ -20,7 +20,7 @@ defined ( 'SYS_EMAIL' ) || define ( 'SYS_EMAIL', 'vuongngocnam@gmail.com' );
 
 //constant for limit item in each page
 
-defined ( 'PAGING_ITEM_LIMIT' ) || define ( 'PAGING_ITEM_LIMIT', 10);
+defined ( 'PAGING_ITEM_LIMIT' ) || define ( 'PAGING_ITEM_LIMIT', 5);
 
 //constant for limit page display in navigate paging line number
 

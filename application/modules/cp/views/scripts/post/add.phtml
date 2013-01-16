@@ -1,12 +1,11 @@
-<ul class="errors_list">
+<section id="main" class="column">
 <?php 
 	$errorsMessages = $this->form->getMessages();
 	foreach($errorsMessages as $messages)
 		foreach ($messages as $message)
-			echo "<li>".$message."</li>"; 
+			echo "<h4 class='alert_error'>".$message."</h4>"; 
 ?>
-</ul>
 <?php 
 echo $this->form;
 ?>
-
+</section>

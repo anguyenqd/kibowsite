@@ -1,15 +1,28 @@
-<form enctype="<?php echo $this->element->getAttrib('enctype'); ?>" action='<?php echo $this->element->getAction(); ?>'
+<article class="module width_full">
+	<header><h3>Post New Article</h3></header>
+	<form enctype="<?php echo $this->element->getAttrib('enctype'); ?>" action='<?php echo $this->element->getAction(); ?>'
 method= '<?php echo $this->element->getMethod(); ?>'>
-<p>Your Image:<br />
-<?php echo $this->element->flPostPicture; ?>
-</p>
-<p>Your caption:<br />
-<?php echo $this->element->txtPostCaption; ?>
-</p>
-<p>Display post :<br />
-<?php echo $this->element->rdStatus; ?>
-</p>
-<p>
-<?php echo $this->element->btnSubmit; ?>
-</p>
-</form>
+	<div class="module_content">
+			<fieldset>
+				<label>Post Picture</label>
+				<?php echo $this->element->flPostPicture; ?>
+			</fieldset>
+			<fieldset>
+				<label>Post Content</label>
+				<?php echo $this->element->txtPostCaption; ?>
+			</fieldset>
+			<fieldset>
+				<label>Display post</label>
+				<?php echo $this->element->rdStatus; ?>
+			</fieldset>
+			<div class="clear"></div>
+		</div>
+	<footer>
+		<div class="submit_link">
+			<?php echo $this->element->btnSubmit; ?>
+			<input type="submit" value="Reset">
+		</div>
+	</footer>
+	</form>
+</article><!-- end of post new article -->
+

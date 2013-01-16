@@ -6,6 +6,8 @@ class Cp_Form_Editpost extends Zend_Form{
 		//old image element
 		$oldImage = $this->createElement('image', 'imgOldImage');
 		$oldImage->setValue(BASE_PATH . UPLOAD_FOLDER . '/images.jpg');
+		$oldImage->setAttrib('width', '200px');
+		$oldImage->setAttrib('style','padding-left:10px');
 		//Post picture element
 		$postPicture = $this->createElement('file', 'flPostPicture');
 		//add size validate
@@ -18,7 +20,7 @@ class Cp_Form_Editpost extends Zend_Form{
 		
 		//Post caption element
 		$postCaption = $this->createElement('textarea','txtPostCaption',array(
-																			'rows'=>'4',
+																			'rows'=>'12',
 																			'cols' => '8'	
 		));
 		//add validate
@@ -35,6 +37,10 @@ class Cp_Form_Editpost extends Zend_Form{
 		$submit = $this->createElement("submit", "btnSubmit",array("label" => "Submit"));
 		$postStatus->removeDecorator('HtmlTag')->removeDecorator('Label');
 		$postStatus->removeDecorator('Errors');
+		$postIDHIdden->removeDecorator('HtmlTag')->removeDecorator('Label');
+		$postIDHIdden->removeDecorator('Errors');
+		$postOldImageHidden->removeDecorator('HtmlTag')->removeDecorator('Label');
+		$postOldImageHidden->removeDecorator('Errors');
 		$oldImage->removeDecorator('HtmlTag');
 		$oldImage->removeDecorator('Errors');
 		$postPicture->removeDecorator('HtmlTag');

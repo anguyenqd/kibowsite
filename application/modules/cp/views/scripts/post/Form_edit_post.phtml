@@ -1,22 +1,37 @@
-<form enctype="<?php echo $this->element->getAttrib('enctype'); ?>" action='<?php echo $this->element->getAction(); ?>'
+<article class="module width_full">
+	<header><h3>Post New Article</h3></header>
+	<form enctype="<?php echo $this->element->getAttrib('enctype'); ?>" action='<?php echo $this->element->getAction(); ?>'
 method= '<?php echo $this->element->getMethod(); ?>'>
-<p>Old Image:<br />
-<?php echo $this->element->imgOldImage; ?>
-</p>
-<p>Your Image:<br />
-<?php echo $this->element->flPostPicture; ?>
-</p>
-<p>Your caption:<br />
-<?php echo $this->element->txtPostCaption; ?>
-</p>
-<p>Display post :<br />
-<?php echo $this->element->rdStatus; ?>
-</p>
-<p>
+	<div class="module_content">
+			<fieldset style="width:24%; float:left; margin-right: 3%;">
+				<label>Old Picture</label>
+				<?php echo $this->element->imgOldImage; ?>
+			</fieldset>
+			<fieldset style="width:72%;float:left;">
+				<label>Post Content</label>
+				<?php echo $this->element->txtPostCaption; ?>
+			</fieldset>
+			<div class="clear"></div>
+			<fieldset style="width:24%; float:left; margin-right: 3%;">
+				<label>Post Picture</label>
+				<?php echo $this->element->flPostPicture; ?>
+			</fieldset>
+			<fieldset style="width:72%;min-height:51px; float:left;">
+				<label>Display post</label>
+				<?php echo $this->element->rdStatus; ?>
+			</fieldset>
+			<div class="clear"></div>
+		</div>
+	<footer>
+		<div class="submit_link">
+			<?php echo $this->element->btnSubmit; ?>
+			<input type="submit" value="Reset">
+		</div>
+	</footer>
 <?php 
 echo $this->element->hdPostID;
-echo $this->element->hdOldImage;
-echo $this->element->btnSubmit; ?>
-</p>
+echo $this->element->hdOldImage;?>
 <input name="txtActionName" id="txtActionName" value="edit-step-2" type="text" style="display:none;" />
-</form>
+	</form>
+</article><!-- end of post new article -->
+

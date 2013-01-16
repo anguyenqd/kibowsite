@@ -72,7 +72,6 @@ class Model_post extends Zend_Db_Table_Abstract{
     	$data=$this->select();
     	$data->from($this->_name);
     	$data->where('post_id = ?', $id);
-    	
     	$data=$this->fetchAll($data);
     	return $data->toArray();
     }
@@ -130,7 +129,7 @@ class Model_post extends Zend_Db_Table_Abstract{
   			return $this->update ($arr_data, $where);
     	}else
     	{
-    		return 0;
+    		return -1;
     	}
     }
     
@@ -138,18 +137,14 @@ class Model_post extends Zend_Db_Table_Abstract{
      * @param int $id : id of the row will be updated
      * @return success row
      */
-    public function deletePost($arr_id,$arr_add_condition){
+    public function deletePost($arr_add_condition){
     	$i = 0;
-    	foreach ($arr_id as $id)
+    	$where = array();
+    	foreach($arr_add_condition as $k => $v)
     	{
-    		$where = array();
-    		$where[] = $this->getAdapter ()->quoteInto ( $this->_primary . ' = ?', $id );
-    		foreach($arr_add_condition as $k => $v)
-    		{
-    			$where[] = $this->getAdapter ()->quoteInto ( $v["colum"] . $v["operater"] . '?', $k );
-    		}
-    		$i += $this->delete($where);
+    		$where[] = $this->getAdapter ()->quoteInto ( $v["colum"] . $v["operater"] . '?', $k );
     	}
+    	$i += $this->delete($where);
   		return $i;
     }
 }
