@@ -1,6 +1,6 @@
+<form name="adminForm" action="<?php echo $this->element->getAction(); ?>" 
+method="<?php echo $this->element->getMethod(); ?>" enctype="multipart/form-data">
 
-<form action="<?php echo $this->element->getAction(); ?>"
-	method="<?php echo $this->element->getMethod(); ?>">
 
 	Email:
 	<?php echo $this->element->txtEmail; ?><br />
@@ -13,6 +13,9 @@
 	
 	Display Name:
 	<?php echo $this->element->txtDisplayName; ?><br />
+	
+	Avatar:
+	<?php echo $this->element->attachment; ?><br />
 	
 	<!-- 
 	Address:

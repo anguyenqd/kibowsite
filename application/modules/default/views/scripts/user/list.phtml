@@ -1,6 +1,23 @@
 <h2>List all of Users</h2>
 <hr />
-<<script type="text/javascript">
+
+<div class="msg_errors">
+	<ul>
+	<?php $msgErrors = $this->msgErrors; ?>
+
+	<?php
+	if (count ( $msgErrors ) > 0) {
+		?>
+			<?php foreach ($this->msgErrors as $error) { ?>
+						<li><?php echo $error; ?></li>	
+			<?php
+		
+		}
+	}
+	?>
+	</ul>
+</div>
+<script type="text/javascript">
 <!--
 /**
  * Toggles the check state of a group of boxes.
@@ -13,6 +30,7 @@
  *            alternative field name
  */
 function checkAll(n) {
+	
 
 	fldName = 'cb';
 
@@ -34,9 +52,51 @@ function checkAll(n) {
 		document.adminForm.boxchecked.value = 0;
 	}
 }
+
+function isChecked(isitchecked) {
+	
+	
+	if (isitchecked == true) {
+		document.adminForm.boxchecked.value++;
+	} else {
+		document.adminForm.boxchecked.value--;
+	}
+}
+function checkThis(cb) {
+	var f = document.adminForm;
+	cb = eval('f.' + cb);
+	if (cb.checked == true) {
+		cb.checked = false;
+		document.adminForm.boxchecked.value--;
+	} else {
+		cb.checked = true;
+		document.adminForm.boxchecked.value++;
+	}
+}
+
+
+function submitform(pressbutton) {
+	if (pressbutton) {
+		document.adminForm.submit_option.value = pressbutton;
+	}
+	if (typeof document.adminForm.onsubmit == "function") {
+		document.adminForm.onsubmit();
+	}
+	document.adminForm.submit();
+}
 //-->
 </script>
-<form method="post" id="formAdmin">
+
+<a 	href="javascript:void(0);" 
+	onclick="if(document.adminForm.boxchecked.value==0) {    
+		alert('Select at least one item.');}
+		else {  submitform('delete')}">Delete</a> ..:..
+<a href="<?php echo BASE_PATH . '/user/send-invitation'; ?>">Send invitation</a> ..:..
+<form method="post" id="formAdmin" name="adminForm">
+
+<input name="boxchecked" type="hidden" value="0" />
+<input name="submit_option" value="" type="hidden" />
+
 <table border="1">
 
 <tfoot>
@@ -55,25 +115,19 @@ function checkAll(n) {
 	<thead>
 		<tr>
 			<th width="2%" class="title">#</th>
-			<th width="3%" class="title"><input type="checkbox" name="toggle"
+			<th width="3%" class="title">
+			<input type="checkbox" name="toggle"
 				value="" onclick="checkAll(<?php echo $this->curPageCount; ?>);"></th>
-			<th class="title"><a
-				href="javascript:tableOrdering('firstname','<?php echo $this->next_order_dir; ?>');">Tên</a></th>
+			<th class="title">Name</th>
 
 			
 
 			<th width="10%" class="title">Email</th>
 
-			<th width="4%"><a
-				href="javascript:tableOrdering('date_create','<?php echo $this->next_order_dir; ?>');">
-					Ngày tạo</a></th>
-			<th width="4%"><a
-				href="javascript:tableOrdering('date_update','<?php echo $this->next_order_dir; ?>');">
-					Ngày sửa</a></th>
+			<th width="4%">Date create</th>
+			<th width="4%">Date update</th>
 
-			<th width="1%" nowrap="nowrap" class="title"><a
-				href="javascript:tableOrdering('id','<?php echo $this->next_order_dir; ?>');"
-				title="Nhấp chuột để sắp xếp theo cột này">ID</a></th>
+			<th width="1%" nowrap="nowrap" class="title">ID</th>
 		</tr>
 	</thead>
 		
@@ -99,7 +153,7 @@ foreach ( $this->paginator as $item => $val ) {
 			onclick="isChecked(this.checked);"></td>
 
 		<td><a
-			href="<?php echo $this->baseUrl('cp/user/edit/id/' . $val['user_id']); ?>">
+			href="<?php echo $this->baseUrl('/user/edit/id/' . $val['user_id']); ?>">
     				    <?php echo $val['display_name']; ?></a></td>
 
 

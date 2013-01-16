@@ -34,11 +34,30 @@ echo $this->headScript ();
     	<a href="<?php echo BASE_PATH . '/user/sign-in'; ?>">Sign In</a>
     	<?php 
     }
+       
     ?> 
     
     ..:..
     <a href="<?php echo BASE_PATH . '/user/sign-out'; ?>">Sign out</a>
+    
+    <?php
+    if (isset($infoUser) && $infoUser->user_group_id == 3) {
+    	?>
+    	..:..<a href="<?php echo BASE_PATH . '/user/list'; ?>">Manage users</a>
+    	<?php 
+    } 
+    ?>
+    
+    ..:..
+    
+    <a href="<?php echo BASE_PATH . '/user/send-invitation'; ?>">Send invitation email</a>
+    
+    ..:..
+    
+    <a href="<?php echo BASE_PATH . '/user/register/reference-code/alsdfjdf459'; ?>">Register page</a>
 	<hr />
+	
+	
 	<?php echo $this->layout()->content; ?>
 </body>
 </html>

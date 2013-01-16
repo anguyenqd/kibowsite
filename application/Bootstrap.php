@@ -9,10 +9,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	
 	}
 	
-	//create global varriable to store database information
-	protected function _initDatabase(){
-		$db = $this->getPluginResource('db')->getDbAdapter();
-		Zend_Registry::set('db', $db);
+	// create global varriable to store database information
+	protected function _initDatabase() {
+		$db = $this->getPluginResource ( 'db' )->getDbAdapter ();
+		Zend_Registry::set ( 'db', $db );
 	}
 	
 	protected function _initAutoload() {
@@ -22,37 +22,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 				'basePath' => APPLICATION_PATH,
 				'namespace' => '',
 				'resourceTypes' => array (
+						
 						'form' => array (
 								'path' => 'forms/',
 								'namespace' => 'Form_' 
 						),
-						'page' => array (
-								'path' => '../library/CMS/Content/Item/',
-								'namespace' => 'CMS_Content_Item_' 
-						),
-						'acl' => array (
-								'path' => '../library/CMS/Controller/Plugin/',
-								'namespace' => 'CMS_Controller_Plugin_' 
-						),
-						'Model_nested' => array (
-								'path' => '../library/VNN/Model/',
-								'namespace' => 'VNN_Model_' 
-						),
-						
-						'nested' => array (
-								'path' => '../library/VNN/',
-								'namespace' => 'VNN_' 
-						),
-						
-						'cp_block' => array (
-								'path' => 'modules/cp/blocks/',
-								'namespace' => 'Cp_Block_' 
-						),
-						
-						'cp_model' => array (
-								'path' => 'modules/cp/models/',
-								'namespace' => 'Cp_Model_' 
-						) 
+						'kent_plugin' => array (
+								'path' => '../library/Kent/Controller/Plugin/',
+								'namespace' => 'Kent_Controller_Plugin_'
+						)
 				) 
 		) );
 		
@@ -67,4 +45,5 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	}
 	
 	
+
 }

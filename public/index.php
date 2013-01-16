@@ -18,9 +18,9 @@ defined ( 'BASE_PATH' ) || define ( 'BASE_PATH', 'http://localhost/kb_zendtemp/p
 
 defined ( 'SYS_EMAIL' ) || define ( 'SYS_EMAIL', 'vuongngocnam@gmail.com' );
 
-defined ( 'PAGING_ITEM_LIMIT' ) || define ( 'PAGING_ITEM_LIMIT', 10);
+defined ( 'PAGING_ITEM_LIMIT' ) || define ( 'PAGING_ITEM_LIMIT', 10 );
 
-defined ( 'PAGING_RANGE_LIMIT' ) || define ( 'PAGING_RANGE_LIMIT', 3);
+defined ( 'PAGING_RANGE_LIMIT' ) || define ( 'PAGING_RANGE_LIMIT', 3 );
 
 /**
  * Phân cách giữa các giá trị nếu giá trị là mảng
@@ -43,13 +43,18 @@ set_include_path ( implode ( PATH_SEPARATOR, array (
 		(APPLICATION_PATH . DS . 'models') 
 ) ) );
 
-
 require_once 'Zend/Application.php';
 
 $application = new Zend_Application ( APPLICATION_ENV, APPLICATION_PATH . DS . 'configs' . DS . 'application.ini' );
 
-$FrontController = Zend_Controller_Front::getInstance ();
+$frontController = Zend_Controller_Front::getInstance ();
+
+
+/*
+ * Zend Auth
+ */
+$auth = Zend_Auth::getInstance();
+$acl = new Kent_Acl($auth);
+$frontController->registerPlugin(new Kent_Controller_Plugin_Acl($auth, $acl));
+ 
 $application->bootstrap ()->run ();
-                
-                
-                

@@ -16,6 +16,10 @@ class Default_Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 						'form_invitation' => array (
 								'path' => 'modules/default/forms/',
 								'namespace' => 'Form_'
+						),
+						'kent' => array (
+								'path' => '../library/Kent/',
+								'namespace' => 'Kent_'
 						)
 				) 
 		) );
