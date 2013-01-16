@@ -25,7 +25,6 @@ class Form_UserEdit extends Zend_Form {
 				'password',
 				'txtPasswordOld',
 				array ( 'class' => 'textbox',
-						'required' => true,
 						'filters' => array (
 								'StringTrim',
 								'StripTags'
@@ -44,14 +43,9 @@ class Form_UserEdit extends Zend_Form {
 				'password',
 				'txtPassword',
 				array ( 'class' => 'textbox',
-						'required' => true,
 						'filters' => array (
 								'StringTrim',
 								'StripTags'
-						),
-						'validators' => array (
-								new Zend_Validate_StringLength ( 
-										array ( 'min' => 3, 'max' => 30 ) )		 
 						)
 		));
 		$password->addErrorMessage ( 'Password is required and must be from 3 to 
@@ -64,7 +58,6 @@ class Form_UserEdit extends Zend_Form {
 				'txtPasswordConfirm',
 				array ( 
 						'class' => 'textbox',
-						'required' => true,
 						'filters' => array (
 								'StringTrim',
 								'StripTags'
@@ -110,6 +103,27 @@ class Form_UserEdit extends Zend_Form {
 		$displayName->removeDecorator ( 'HtmlTag' )->removeDecorator ( 'Label' );
 		$displayName->removeDecorator ( 'Errors' );
 		
+		$currentAvatar = $this->createElement('image', 'currentAvatar');
+		$currentAvatar->setAttrib('src', BASE_PATH . '/' .  UPLOAD_FOLDER . '/noimg.jpg');
+		
+		$avatar = $this->createElement( 'file', 'attachment', array( 'class' => 'inputilfe' ) );
+		$avatar->setLabel('Attach a file');
+		$avatar->setRequired(FALSE);
+		// specify the path to the upload folder. this should not be publicly
+		// accessible!
+		$avatar->setDestination(UPLOAD_PATH);
+		// ensure that only 1 file is uploaded
+		// ensure minimum 1, maximum 3 files
+		$avatar->addValidator('Count', false,
+				array('min' => 0, 'max' => 10));
+		$avatar->setMultiFile(1);
+		$avatar->addValidator('Size', false, 204800);
+		$avatar->addValidator('Extension', false, 'jpg,png,gif');
+		$avatar->addErrorMessage ( 'Avatar must be have Extension: jpg,png,gif and less than 2Mb.' );
+		$avatar->removeDecorator ( 'HtmlTag' )->removeDecorator ( 'Label' );
+		$avatar->removeDecorator ( 'Errors' );
+		$this->setAttrib('enctype', 'multipart/form-data');
+		
 		$biography = $this->createElement ( "text", "txtBiography", array (
 				'class' => 'textbox',
 				'filters' => array (
@@ -152,7 +166,7 @@ class Form_UserEdit extends Zend_Form {
 		
 		$this->addElements ( array (
 				$email, $password_old, $password, $password_confirm,
-				$address, $phone, $displayName, $biography, 
+				$address, $phone, $displayName, $currentAvatar, $avatar, $biography, 
 				$twitter, $facebook, $privacyStatus
 		) );
 		

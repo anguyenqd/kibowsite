@@ -19,10 +19,10 @@ class PostController extends Zend_Controller_Action {
 		$this->view->headLink()->appendStylesheet($baseurl . "/css/colorbox.css");
 		$this->view->headLink()->appendStylesheet($baseurl . "/css/layout.css");
 		$this->view->headLink()->appendStylesheet($baseurl . "/css/ie.css", "all","ie");
-		$this->view->headscript()->appendFile($baseurl . "/js/jquery-1.8.3.min.js","text/javascript");
-		$this->view->headscript()->appendFile($baseurl . "/js/jquery.masonry.min.js","text/javascript");
-		$this->view->headscript()->appendFile($baseurl . "/js/jquery.colorbox-min.js","text/javascript");
-		$this->view->headscript()->appendFile($baseurl . "/js/controllAll.js","text/javascript");
+		$this->view->headScript()->appendFile($baseurl . "/js/jquery-1.8.3.min.js","text/javascript");
+		$this->view->headScript()->appendFile($baseurl . "/js/jquery.masonry.min.js","text/javascript");
+		$this->view->headScript()->appendFile($baseurl . "/js/jquery.colorbox-min.js","text/javascript");
+		$this->view->headScript()->appendFile($baseurl . "/js/controllAll.js","text/javascript");
 		
 		
 		$paginator = $this->_loadPostList();

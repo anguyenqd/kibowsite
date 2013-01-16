@@ -9,10 +9,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	
 	}
 	
-	//create global varriable to store database information
-	protected function _initDatabase(){
-		$db = $this->getPluginResource('db')->getDbAdapter();
-		Zend_Registry::set('db', $db);
+	// create global varriable to store database information
+	protected function _initDatabase() {
+		$db = $this->getPluginResource ( 'db' )->getDbAdapter ();
+		Zend_Registry::set ( 'db', $db );
 	}
 	
 	protected function _initAutoload() {
@@ -27,10 +27,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 								'path' => 'modules/default/models/',
 								'namespace' => 'Model_'
 						),
-						'default_form' => array (
-								'path' => 'modules/default/forms/',
-								'namespace' => 'Form_'
-						),
 						'dante_thumbnail' => array (
 								'path' => '../library/Dante/Thumbnail/',
 								'namespace' => 'Dante_Thumbnail_'
@@ -44,6 +40,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 								'path' => 'modules/cp/forms/',
 								'namespace' => 'Cp_Form_'
 						),
+						
+						'form' => array (
+								'path' => 'forms/',
+								'namespace' => 'Form_' 
+						),
+						'kent_plugin' => array (
+								'path' => '../library/Kent/Controller/Plugin/',
+								'namespace' => 'Kent_Controller_Plugin_'
+						)
 				) 
 		) );
 		
@@ -58,4 +63,5 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	}
 	
 	
+
 }

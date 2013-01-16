@@ -9,7 +9,7 @@ class Model_User extends Zend_Db_Table_Abstract {
 	protected $_name = 'kb_user';
 	protected $_primary = 'user_id';
 	
-	public function deleteItem($id) {
+	public function deleteUser($id) {
 		
 		$row = $this->find ( $id )->current ();
 		if ($row) {

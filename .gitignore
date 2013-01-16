@@ -3,4 +3,8 @@ LICENSE.txt
 README.txt
 demos/
 extras/documentation
+public/index.php
+application/Bootstrap.php
+application/configs/aplication.ini
+
 
